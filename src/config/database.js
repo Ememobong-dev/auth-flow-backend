@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { env } from "./env.js";
-import { DB_NAME } from "./../constants/index";
+import { DB_NAME } from "./../constants/index.js";
 
 export const connectDatabase = async () => {
   try {
@@ -9,12 +9,12 @@ export const connectDatabase = async () => {
       serverSelectionTimeoutMS: 10000,
     });
     console.log(
-      `MongoDb Connected successfully: ${connection.connection.host} ${connection.connection.host}`,
+      `MongoDb Connected successfully: ${connection.connection.host} \n ${connection.connection.name}`,
     );
 
     return connection;
   } catch (error) {
-    console.error(`MongoDb failed to connect successfully: ${error}`);
+    console.error(`MongoDb failed to connect successfully: ${error.message}`);
     throw error;
   }
 };

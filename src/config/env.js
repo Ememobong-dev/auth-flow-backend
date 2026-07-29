@@ -22,13 +22,13 @@ const validationData = environmentSchema.safeParse(process.env);
 
 if (!validationData.success) {
   const errors = validationData.error.issues.map((issue) => {
-    const field = issue.path.join(".");
-
+    const field = issue.path.join(".") || "environment";
     return `${field} : ${issue.message}`;
-  });
+  })
+  .join("\n");
 
   console.error(`An error occured in the environment \n ${errors}`)
-  throw error;
+  process.exit(1);
 }
 
 

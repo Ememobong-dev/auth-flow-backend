@@ -1,6 +1,6 @@
-import { env } from './../config/env';
+import { env } from './../config/env.js';
 
-export const error = (error, req, res, next) => {
+export const errorHandler = (error, _req, res, _next) => {
     const statusCode = error.statusCode ?? 500;
     
     const isProduction = env.NODE_ENV === "production"
@@ -11,13 +11,18 @@ export const error = (error, req, res, next) => {
 
 
     const responseBody = {
-        status: false,
+        success: false,
         message
     }
 
     if(error.details){
         responseBody.details = error.details
     }
+
+    if (!isProduction) {
+        responseBody.stack = error.stack;
+      }
+    
 
     res.status(statusCode).json(responseBody)
 }
