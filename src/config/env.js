@@ -31,7 +31,7 @@ const environmentSchema = z.object({
 
   JWT_ACCESS_SECRET_EXPIRE: z.string().trim().default("15m"),
 
-  RESET_PASSWORD_EXPIRES_IN_MINUTES=z.coerce.number().int().positive().default(15) ,
+  RESET_PASSWORD_EXPIRES_IN_MINUTES:  z.coerce.number().int().positive().default(15),
 
 
   SMTP_HOST: z.string().trim().min(1, "SMTP HOST cannot be empty"),
